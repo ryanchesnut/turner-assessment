@@ -8,16 +8,15 @@ const Titles = ({ titles }) => {
 
     useEffect ( () => {
         if(titles.data){        
-            let data = await titles.data.map( (title) => {
+            titles.data.map( (title) => {
                 let poster = getPoster(title.TitleName);
                 poster.then(
                     data => {
-                        return data
+                        title.poster = data.toString()
                         console.log(data)
                     }
                 )
             })
-            setPoster([...posters, data])
         }
     }, [])
 
