@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
     const collection = req.app.locals.collection;
     collection.find().toArray(function (err, data) {
-        res.send(JSON.stringify(data))
+        res.send(data)
         console.log(data)
     })
 })
@@ -19,7 +19,7 @@ router.get('/:queryString', (req, res) => {
     let search = new RegExp(`${qs}`, 'i')
     console.log(search)
     collection.find({ "TitleName": search }).toArray(function (err, data) {
-        res.send(JSON.stringify(data))
+        res.send(data)
         console.log(data)
     })
 })

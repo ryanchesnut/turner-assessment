@@ -5,7 +5,10 @@ const express = require('express')
 const app = express()
 const port = 3001
 const titleRoute = require('./routes/get')
+const cors = require('cors')
 
+//Enabled for local development
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send([{ message: "Home route" }])

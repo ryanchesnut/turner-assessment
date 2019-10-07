@@ -3,7 +3,8 @@ import {Navbar, Nav} from 'react-bootstrap'
 import Search from './Search'
 const logo = require('../assets/logo.svg')
 
-const TopNav = () => {
+const TopNav = ({setTitles}) => {
+
     return (
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="#">
@@ -19,7 +20,7 @@ const TopNav = () => {
 
             </Nav>
             <br/>
-            <Search/>
+            <Search setTitles={setTitles}/>
         </Navbar>
     )
 }
