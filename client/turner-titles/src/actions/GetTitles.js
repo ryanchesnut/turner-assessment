@@ -11,7 +11,8 @@ const getTitles = async(query) => {
     }
   
     let data = await fetch(url).catch(err => console.log(err))
-    let arr = data.json()
+    let arr 
+    data  ? arr = data.json() : arr = []
     return arr
 }
 

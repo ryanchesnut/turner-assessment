@@ -6,7 +6,6 @@ let getData = async(query) => {
     let data = await fetch(url)
     data = data.json()
     data = await data.then(data => callBack(data))
-    console.log(data.Poster)
     poster = data.Poster 
     return poster
 }

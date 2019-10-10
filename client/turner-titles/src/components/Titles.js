@@ -4,14 +4,16 @@ import { CardDeck, Card } from 'react-bootstrap'
 import getPoster from '../actions/GetPoster'
 
 const Titles = ({ titles }) => {
-    const [setPoster] = useState()
+    const [posters, setPosters] = useState({})
 
-    useEffect(() => {
+    useEffect(() => {    
         if(titles.data) {
         titles.data.forEach( title => {
         const getData = async () => {
                 let poster = await getPoster(title.TitleName)
-                //setPoster(title.poster = poster)
+                let name = title.TitleName
+                let thisPoster = { [name]: poster }
+                setPosters((prev) => { return { ...prev, ...thisPoster} } ) 
             }
             getData()
          })
@@ -19,30 +21,12 @@ const Titles = ({ titles }) => {
         
     }, [titles])
 
-                // for (let i = 0; i < t.data.length; i++) {
-                //     let title = t.data[i]
-                //     console.log(title.TitleName)
-                //     let poster =  getPoster(title.TitleName);
-                //     let data =  poster.then(
-                //         data => {
-                //             title.poster = data.toString()
-                //             console.log(data)
-                //             setPoster([...posters, data])
-                //         }
-                //     )
-                //     console.log(data)
-                // }
-
-
-
-
     const renderCards = (titles) => {
         return titles.data.map((title, i) => {
-            console.log(typeof title.poster)
             return (
                 <div className="col-md-4" key={i}>
                     <Card>
-                        <Card.Img variant="top" src={title.poster} />
+                        <Card.Img variant="top" src={posters[title.TitleName]} style={{"height": "400px"}}/>
                         <Card.Body>
                             <Card.Title>{title.TitleName}</Card.Title>
                             <Card.Text>
@@ -74,7 +58,7 @@ const Titles = ({ titles }) => {
     return (
         <CardDeck>
             {
-                titles.data ? renderCards(titles) : <> </>
+                titles.data && posters ? renderCards(titles) : <> </>
             }
         </CardDeck>
     )
